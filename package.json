@@ -1,0 +1,53 @@
+{
+  "name": "@ehven/http-response-header-policy",
+  "version": "0.1.0",
+  "description": "Dependency-free, declarative response header policies for Fetch-compatible servers.",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.mjs"
+    }
+  },
+  "types": "./src/index.d.ts",
+  "files": [
+    "src/index.mjs",
+    "src/index.d.ts",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=24"
+  },
+  "license": "MIT",
+  "author": "Gilad Ehven",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ehven-consultants-npm-products/ehven-http-response-header-policy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ehven-consultants-npm-products/ehven-http-response-header-policy/issues"
+  },
+  "homepage": "https://github.com/ehven-consultants-npm-products/ehven-http-response-header-policy#readme",
+  "keywords": [
+    "http",
+    "headers",
+    "security",
+    "fetch",
+    "cloudflare",
+    "policy"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "check:types": "tsc --project test/types/tsconfig.json",
+    "check": "node --check src/index.mjs && npm test && npm run check:types"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3"
+  }
+}
