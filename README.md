@@ -2,8 +2,10 @@
 
 Declarative HTTP response header policies with zero runtime dependencies.
 
-**Unreleased candidate.** Registry installation and Cloudflare Workers acceptance
-are pending. The currently exercised runtime is Node.js 24.22.3.
+**Unreleased candidate.** Registry installation and live Cloudflare deployment
+acceptance are pending. Exercised runtimes: Node.js 24.22.3 and local
+workerd 1.20261121.1 with compatibility date 2026-11-21. Local runtime checks
+do not certify every deployed Workers binding, asset or compression path.
 
 ## Install and first use
 
@@ -177,7 +179,7 @@ return new Response(upstream.body, {
 
 This recipe is not a general instruction to mark every upstream body compressed.
 Follow the [Workers Response documentation](https://developers.cloudflare.com/workers/runtime-apis/response/)
-and test the actual host's compression path. Workers acceptance is still pending.
+and test the actual host's compression path. Deployed-host acceptance is still pending.
 
 ## Migration and removal
 
@@ -192,6 +194,11 @@ database, timer or background process to clean up. Retain replacement headers
 where your application's security requirements still need them.
 
 ## Support and security
+
+While the package is below 1.0, minor releases may change the public contract;
+patch releases preserve it. Pin an exact version in production and review the
+changelog before upgrading. Version 0.1.0 is an unreleased candidate, not an
+available registry installation or a promise that its current API is final.
 
 Use [GitHub issues](https://github.com/ehven-consultants-npm-products/ehven-http-response-header-policy/issues)
 for non-sensitive bugs. For sensitive findings, use the repository's private
