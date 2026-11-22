@@ -45,7 +45,8 @@
   "scripts": {
     "test": "node --test test/*.test.mjs",
     "check:types": "tsc --project test/types/tsconfig.json",
-    "check": "node --check src/index.mjs && npm test && npm run check:types"
+    "check": "node --check src/index.mjs && npm test && npm run check:types",
+    "release:prepare": "node scripts/release.mjs prepare"
   },
   "devDependencies": {
     "typescript": "5.9.3"
