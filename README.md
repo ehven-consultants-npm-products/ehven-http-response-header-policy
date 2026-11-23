@@ -2,14 +2,13 @@
 
 Declarative HTTP response header policies with zero runtime dependencies.
 
-**1.0.0 release candidate.** Registry installation and live Cloudflare deployment
-acceptance are pending. Exercised runtimes: Node.js 24.0.0 and 24.22.3, plus local
+Exercised runtimes: Node.js 24.0.0 and 24.22.3, plus local
 workerd 1.20261121.1 with compatibility date 2026-09-15. Local runtime checks
 do not certify every deployed Workers binding, asset or compression path.
 
 ## Install and first use
 
-After the first release:
+Install the package:
 
 ```sh
 npm install @ehven/http-response-header-policy
@@ -205,8 +204,7 @@ where your application's security requirements still need them.
 Starting with 1.0.0, patch releases contain compatible corrections and minor
 releases contain compatible additions. Breaking public-contract changes require
 a new major version. Pin an exact version in production and review the changelog
-before upgrading. Version 1.0.0 is currently an unreleased candidate; registry
-installation becomes available after publication.
+before upgrading.
 
 Use [GitHub issues](https://github.com/ehven-consultants-npm-products/ehven-http-response-header-policy/issues)
 for non-sensitive bugs. For sensitive findings, use the repository's private
