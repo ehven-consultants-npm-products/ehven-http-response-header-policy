@@ -1,6 +1,6 @@
 {
   "name": "@ehven/http-response-header-policy",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Dependency-free, declarative response header policies for Fetch-compatible servers.",
   "type": "module",
   "exports": {

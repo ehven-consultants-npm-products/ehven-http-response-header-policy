@@ -2,7 +2,7 @@
 
 ## Supported versions
 
-There are no published releases yet. Version 0.1.0 is an unreleased candidate.
+There are no published releases yet. Version 1.0.0 is an unreleased candidate.
 Reports concerning the current main branch are welcome. Published compatibility
 and upgrade expectations will follow the versioned README and changelog.
 

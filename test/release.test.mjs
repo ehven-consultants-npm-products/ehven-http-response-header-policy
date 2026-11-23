@@ -28,7 +28,7 @@ test('shared release preparation produces the exact ESM tarball and matching che
     const candidate = prepare(dir);
     assert.equal(candidate.name, '@ehven/http-response-header-policy');
     assert.equal(candidate.repository, 'ehven-consultants-npm-products/ehven-http-response-header-policy');
-    assert.equal(candidate.tag, 'v0.1.0');
+    assert.equal(candidate.tag, 'v1.0.0');
     assert.equal(candidate.assets.length, 2, 'conditional ESM exports are delivered inside the tarball');
     for (const asset of candidate.assets) assert.equal(sha(readFileSync(join(dir, 'release', asset.name))), asset.sha256);
     assert.match(readFileSync(join(dir, 'release', 'SHA256SUMS'), 'utf8'), new RegExp('^' + sha(readFileSync(join(dir, 'release', candidate.tarball))) + '  ' + candidate.tarball.replaceAll('.', '\\.') + '\\n$'));
