@@ -12,11 +12,27 @@ jobs:
       fail-fast: false
       matrix:
         node: ['24.0.0', '24.22.3']
+        npm: ['bundled']
+        include:
+          - node: '24.22.3'
+            npm: '12.2.2'
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: ${{ matrix.node }}
+      - name: Select release npm
+        if: ${{ matrix.npm == '12.2.2' }}
+        run: |
+          curl --fail --silent --show-error --max-time 30 --max-filesize 8388608 https://registry.npmjs.org/npm/-/npm-12.2.2.tgz -o "$RUNNER_TEMP/npm.tgz"
+          node --input-type=module -e 'import{readFileSync}from"node:fs";import{createHash}from"node:crypto";if(createHash("sha512").update(readFileSync(process.env.RUNNER_TEMP+"/npm.tgz")).digest("base64")!=="KglgbZyacf7jH+FHuNRqVuCzQi8VhI2a7J87Ix43FsPTuZoGWmIXXGdZtBUOA79vwL+IJREqURVzupA7PsQTcA==")process.exit(1)'
+          mkdir "$RUNNER_TEMP/release-npm"
+          tar -xzf "$RUNNER_TEMP/npm.tgz" --no-same-owner --no-same-permissions -C "$RUNNER_TEMP/release-npm"
+          mkdir "$RUNNER_TEMP/release-npm/bin"
+          ln -s "$RUNNER_TEMP/release-npm/package/bin/npm-cli.js" "$RUNNER_TEMP/release-npm/bin/npm"
+          echo "$RUNNER_TEMP/release-npm/bin" >> "$GITHUB_PATH"
       - run: npm ci --ignore-scripts
       - run: npm run check
       - run: npm pack --ignore-scripts --dry-run
