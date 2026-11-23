@@ -2,9 +2,10 @@
 
 ## Supported versions
 
-There are no published releases yet. Version 1.0.0 is an unreleased candidate.
-Reports concerning the current main branch are welcome. Published compatibility
-and upgrade expectations will follow the versioned README and changelog.
+For the 1.x release line, report findings against the latest available 1.x
+version and include the exact version or commit. Reports concerning the current
+main branch are welcome. Compatibility and upgrade expectations follow the
+versioned README and changelog. No response-time SLA is promised.
 
 ## Report privately
 
