@@ -11,7 +11,10 @@ test('packed package installs offline and its ESM/types work outside the source 
   const dir = mkdtempSync(join(tmpdir(), 'http-policy-consumer-'));
   const run = (command, args, cwd = dir) => execFileSync(command, args, { cwd, timeout: 60000, stdio: ['ignore', 'pipe', 'pipe'] }).toString();
   try {
-    const [packed] = JSON.parse(run('npm', ['pack', '--ignore-scripts', '--json', '--pack-destination', dir], root));
+    const response = JSON.parse(run('npm', ['pack', '--ignore-scripts', '--json', '--pack-destination', dir], root));
+    const entries = Array.isArray(response) ? response : Object.values(response);
+    assert.equal(entries.length, 1, 'expected exactly one packed package');
+    const [packed] = entries;
     assert.deepEqual(packed.files.map(x => x.path).sort(), ['CHANGELOG.md', 'LICENSE', 'README.md', 'package.json', 'src/index.d.ts', 'src/index.mjs'].sort());
     assert.ok(packed.size <= 30000, 'packed artifact exceeds the 30 kB candidate budget');
     writeFileSync(join(dir, 'package.json'), JSON.stringify({ private: true, type: 'module' }));
