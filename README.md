@@ -2,9 +2,9 @@
 
 Declarative HTTP response header policies with zero runtime dependencies.
 
-**Unreleased candidate.** Registry installation and live Cloudflare deployment
-acceptance are pending. Exercised runtimes: Node.js 24.22.3 and local
-workerd 1.20261121.1 with compatibility date 2026-11-21. Local runtime checks
+**1.0.0 release candidate.** Registry installation and live Cloudflare deployment
+acceptance are pending. Exercised runtimes: Node.js 24.0.0 and 24.22.3, plus local
+workerd 1.20261121.1 with compatibility date 2026-09-15. Local runtime checks
 do not certify every deployed Workers binding, asset or compression path.
 
 ## Install and first use
@@ -20,6 +20,8 @@ import { createResponseHeaderPolicy } from '@ehven/http-response-header-policy';
 
 const policy = createResponseHeaderPolicy();
 const response = policy.apply(new Response('Hello', { status: 200 }));
+console.log(response.headers.get('x-content-type-options')); // nosniff
+console.log(await response.text()); // Hello
 ```
 
 This is an ESM server library using the host's `Headers` and `Response` globals.
@@ -100,6 +102,11 @@ application rules remain active; per-call `skip` or `remove` can replace them.
 
 The factory copies its configuration. Later caller mutations cannot change the
 compiled policy, and one response's overrides cannot affect another response.
+
+Configuration is trusted, application-owned data. The package does not sandbox
+executable objects or impose a universal header-size limit. Validate untrusted
+request data before using it to choose rules, and respect the host or proxy's
+header-size limits.
 
 ## CSP and framing ownership
 
@@ -195,10 +202,11 @@ where your application's security requirements still need them.
 
 ## Support and security
 
-While the package is below 1.0, minor releases may change the public contract;
-patch releases preserve it. Pin an exact version in production and review the
-changelog before upgrading. Version 0.1.0 is an unreleased candidate, not an
-available registry installation or a promise that its current API is final.
+Starting with 1.0.0, patch releases contain compatible corrections and minor
+releases contain compatible additions. Breaking public-contract changes require
+a new major version. Pin an exact version in production and review the changelog
+before upgrading. Version 1.0.0 is currently an unreleased candidate; registry
+installation becomes available after publication.
 
 Use [GitHub issues](https://github.com/ehven-consultants-npm-products/ehven-http-response-header-policy/issues)
 for non-sensitive bugs. For sensitive findings, use the repository's private
